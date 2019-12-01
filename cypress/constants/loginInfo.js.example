@@ -1,0 +1,4 @@
+export const KYOBO_ID = 'example';
+export const KYOBO_PW = 'example';
+export const ELEVENST_ID = 'example';
+export const ELEVENST_PW = 'example';
