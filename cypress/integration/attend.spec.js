@@ -1,4 +1,9 @@
-import { KYOBO_ID, KYOBO_PW } from '../constants/loginInfo';
+import {
+  KYOBO_ID,
+  KYOBO_PW,
+  ELEVENST_ID,
+  ELEVENST_PW
+} from '../constants/loginInfo';
 
 describe('출첵용', function() {
   it('교보문고 로그인', function() {
@@ -19,20 +24,29 @@ describe('출첵용', function() {
   });
 
   it('11st 로그인 & 출첵', function() {
-    cy.visit('https://login.11st.co.kr/auth/front/login.tmall');
+    cy.visit(
+      'https://login.11st.co.kr/auth/front/login.tmall?xfrom=&returnURL=https%3A%2F%2Fwww.11st.co.kr%2Fhtml%2Fmain.html'
+    );
 
     cy.get('#loginName').type(ELEVENST_ID);
 
     cy.get('#passWord').type(ELEVENST_PW);
 
-    cy.get('.btn_a').click();
+    cy.get('.btn_Atype.btn_a').click();
 
-    cy.get('.attend_chk > a').click();
+    // 이벤트 페이지 진입
+    cy.get('[data-log-actionid-label="event"]').click();
 
-    cy.visit(
-      'http://www.11st.co.kr/browsing/MallPlanDetail.tmall?method=getMallPlanDetail&planDisplayNumber=935566'
-    );
+    // 출석체크 페이지 진입, target: _blank 제거
+    cy.get(
+      '[href="http://www.11st.co.kr/browsing/MallPlanDetail.tmall?method=getMallPlanDetail&planDisplayNumber=935566"]'
+    )
+      .invoke('removeAttr', 'target')
+      .click();
 
-    cy.get('.attend_chk > a').click();
+    cy.get('[href="javascript:evtAttendJoin();"]').click();
+    // cy.get('[href="javascript:evtAttendFstJoin();"]').click();
+    // cy.get('[href="javascript:evtAttendScdJoin();"]').click();
+    // cy.get('[href="javascript:evtAttendThdJoin();"]').click();
   });
 });
