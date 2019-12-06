@@ -4,7 +4,9 @@ import {
   ELEVENST_ID,
   ELEVENST_PW,
   GMARKET_ID,
-  GMARKET_PW
+  GMARKET_PW,
+  ENURI_ID,
+  ENURI_PW
 } from '../constants/loginInfo';
 
 describe('출첵용', function() {
@@ -95,5 +97,25 @@ describe('출첵용', function() {
       cy.wrap($buttons[1]).click();
       cy.wrap($buttons[2]).click();
     });
+  });
+  it('에누리', function() {
+    cy.visit(
+      'https://www.enuri.com/member/login/login.jsp?rtnUrl=http%3A%2F%2Fwww.enuri.com%2Fevt%2Fvisit.jsp%23evt1&cmdtype='
+    );
+
+    // Get an input, type into it and verify that the value has been updated
+    cy.get('#user_id')
+      .type(ENURI_ID)
+      .should('have.value', ENURI_ID);
+
+    cy.get('#user_pw')
+      .type(ENURI_PW)
+      .should('have.value', ENURI_PW);
+
+    cy.get('#btnLogin').click();
+    cy.get('em.chkat.today').click();
+    cy.get('a.btn.layclose').click();
+    cy.get('#txt_area').type('오늘 하루도 화이팅하세요! 힘찬 하루!');
+    cy.get('#regist').click();
   });
 });

@@ -4,3 +4,5 @@ export const ELEVENST_ID = 'example';
 export const ELEVENST_PW = 'example';
 export const GMARKET_ID = '';
 export const GMARKET_PW = '';
+export const ENURI_ID = '';
+export const ENURI_PW = '';
