@@ -10,7 +10,9 @@ import {
   OKCASHBAG_ID,
   OKCASHBAG_PW,
   YES24_ID,
-  YES24_PW
+  YES24_PW,
+  HPOINT_ID,
+  HPOINT_PW
 } from '../constants/loginInfo';
 
 describe('출첵용', function() {
@@ -148,5 +150,19 @@ describe('출첵용', function() {
         cy.wrap($buttons[1]).click();
       });
     });
+  });
+
+  it('hpoint', function() {
+    cy.visit(
+      'https://www.thehyundai.com/front/cob/loginPup.thd?MainpageGroup=Util&GroupbannerName=GNB_Login'
+    );
+    cy.get('input#custId').type(HPOINT_ID);
+    cy.get('input#custPwd').type(HPOINT_PW);
+    cy.get('#hMember form div button.btn.btn-login').click();
+    cy.visit(
+      'https://www.thehyundai.com/CS/eva/evntPatternedDetail.thd?prmoNo=00000708&EvMainpageGroup=Runningevent&EvGroupbannerName=Runningevent_7'
+    );
+    // 오류. 계속 휴대폰 인증하라고 뜸...
+    cy.get('div.ecb-roulette-btn a').click();
   });
 });
