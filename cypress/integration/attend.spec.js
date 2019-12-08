@@ -89,36 +89,42 @@ describe('출첵용', function() {
       cy.wrap($buttons[2]).click();
     });
   });
-  it('에누리', function() {
-    cy.visit(
-      'https://www.enuri.com/member/login/login.jsp?rtnUrl=http%3A%2F%2Fwww.enuri.com%2Fevt%2Fvisit.jsp%23evt1&cmdtype='
-    );
-    // Get an input, type into it and verify that the value has been updated
-    cy.get('#user_id')
-      .type(ENURI_ID)
-      .should('have.value', ENURI_ID);
-    cy.get('#user_pw')
-      .type(ENURI_PW)
-      .should('have.value', ENURI_PW);
-    cy.get('#btnLogin').click();
-    cy.get('em.chkat.today').click();
-    cy.get('a.btn.layclose').click();
-    cy.get('#txt_area').type('오늘 하루도 화이팅하세요! 힘찬 하루!');
-    cy.get('#regist').click();
+  describe('에누리', function() {
+    beforeEach(function() {
+      cy.visit(
+        'https://www.enuri.com/member/login/login.jsp?rtnUrl=http%3A%2F%2Fwww.enuri.com%2Fevt%2Fvisit.jsp%23evt1&cmdtype='
+      );
+      // Get an input, type into it and verify that the value has been updated
+      cy.get('#user_id')
+        .type(ENURI_ID)
+        .should('have.value', ENURI_ID);
+      cy.get('#user_pw')
+        .type(ENURI_PW)
+        .should('have.value', ENURI_PW);
+      cy.get('#btnLogin').click();
+    });
+    it('에누리', function() {
+      cy.get('em.chkat.today').click();
+      cy.get('a.btn.layclose').click();
+    });
+    it('댓글', function() {
+      cy.get('#txt_area').type('오늘 하루도 화이팅하세요! 힘찬 하루!');
+      cy.get('#regist').click();
+    });
   });
 
-  it('OK 캐시백 로그인', function() {
-    cy.visit('http://m.okcashbag.com/life/event/attend/attendMain.mocb');
-    // Get an input, type into it and verify that the value has been updated
-    cy.get('li.today p button[type="button"]').click();
-    cy.get('#loginname')
-      .type(OKCASHBAG_ID)
-      .should('have.value', OKCASHBAG_ID);
-    cy.get('#passwd')
-      .type(OKCASHBAG_PW)
-      .should('have.value', OKCASHBAG_PW);
-    // 보안문자에서 막힘.
-  });
+  // it('OK 캐시백 로그인', function() {
+  //   cy.visit('http://m.okcashbag.com/life/event/attend/attendMain.mocb');
+  //   // Get an input, type into it and verify that the value has been updated
+  //   cy.get('li.today p button[type="button"]').click();
+  //   cy.get('#loginname')
+  //     .type(OKCASHBAG_ID)
+  //     .should('have.value', OKCASHBAG_ID);
+  //   cy.get('#passwd')
+  //     .type(OKCASHBAG_PW)
+  //     .should('have.value', OKCASHBAG_PW);
+  //   // 보안문자에서 막힘.
+  // });
 
   describe('yes24', function() {
     it('공연', function() {
@@ -148,17 +154,17 @@ describe('출첵용', function() {
     });
   });
 
-  it('hpoint', function() {
-    cy.visit(
-      'https://www.thehyundai.com/front/cob/loginPup.thd?MainpageGroup=Util&GroupbannerName=GNB_Login'
-    );
-    cy.get('input#custId').type(HPOINT_ID);
-    cy.get('input#custPwd').type(HPOINT_PW);
-    cy.get('#hMember form div button.btn.btn-login').click();
-    cy.visit(
-      'https://www.thehyundai.com/CS/eva/evntPatternedDetail.thd?prmoNo=00000708&EvMainpageGroup=Runningevent&EvGroupbannerName=Runningevent_7'
-    );
-    // 오류. 계속 휴대폰 인증하라고 뜸...
-    cy.get('div.ecb-roulette-btn a').click();
-  });
+  // it('hpoint', function() {
+  //   cy.visit(
+  //     'https://www.thehyundai.com/front/cob/loginPup.thd?MainpageGroup=Util&GroupbannerName=GNB_Login'
+  //   );
+  //   cy.get('input#custId').type(HPOINT_ID);
+  //   cy.get('input#custPwd').type(HPOINT_PW);
+  //   cy.get('#hMember form div button.btn.btn-login').click();
+  //   cy.visit(
+  //     'https://www.thehyundai.com/CS/eva/evntPatternedDetail.thd?prmoNo=00000708&EvMainpageGroup=Runningevent&EvGroupbannerName=Runningevent_7'
+  //   );
+  //   // 오류. 계속 휴대폰 인증하라고 뜸...
+  //   cy.get('div.ecb-roulette-btn a').click();
+  // });
 });
